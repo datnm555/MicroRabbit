@@ -20,11 +20,11 @@ namespace MicroRabbit.Infra.Bus
         private readonly Dictionary<string, List<Type>> _handlers;
         private readonly List<Type> _eventTypes;
 
-        public RabbitMQBus(IMediator mediator, Dictionary<string, List<Type>> handlers, List<Type> eventTypes)
+        public RabbitMQBus(IMediator mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-            _handlers = handlers ?? throw new ArgumentNullException(nameof(handlers));
-            _eventTypes = eventTypes ?? throw new ArgumentNullException(nameof(eventTypes));
+            _handlers = new Dictionary<string, List<Type>>();
+            _eventTypes = new List<Type>();
         }
 
         public void Publish<T>(T @event) where T : Event
